@@ -55,6 +55,8 @@ export default defineComponent({
 
 		const resetForm = () => {
 			bill.value = "";
+			people.value = "";
+			tip.value = 0;
 		};
 
 		const results = computed(() => {
