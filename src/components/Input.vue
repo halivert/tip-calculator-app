@@ -3,9 +3,9 @@
 		<label :for="name">{{ name }}</label>
 		<input
 			:name="name"
-			:type="$attrs.type"
 			:value="modelValue"
 			@input="emitBill"
+			v-bind="$attrs"
 		/>
 	</div>
 </template>
@@ -43,9 +43,6 @@ export default defineComponent({
 }
 
 input {
-	font-family: var(--font-family);
-	font-size: var(--font-size);
-	font-weight: 700;
 	color: var(--dark-cyan);
 	box-sizing: border-box;
 	outline: none;

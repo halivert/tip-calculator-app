@@ -18,21 +18,26 @@
 				v-model="customTip"
 				placeholder="Custom"
 				@focus="rememberLastCustomTip"
-				@input="$emit('update:modelValue', $event.target.value)"
+				@input="emitCustomTip($event.target.value)"
+				@blur="restoreLastTip"
 			/>
 		</div>
 	</div>
 </template>
 
 <script>
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, toRefs, watch } from "vue";
 
 export default defineComponent({
+	props: {
+		modelValue: Number,
+	},
 	emits: ["update:modelValue"],
-	setup(_, ctx) {
+	setup(props, ctx) {
 		const lastCustomTip = ref("");
 		const selectedTip = ref("");
 		const customTip = ref("");
+		const { modelValue: lastTip } = toRefs(props);
 
 		watch(selectedTip, (selectedTip) => {
 			if (selectedTip) {
@@ -49,11 +54,24 @@ export default defineComponent({
 			}
 		};
 
+		const restoreLastTip = ({ target }) => {
+			if (parseInt(target.value) !== lastTip.value) {
+				selectedTip.value = lastTip.value;
+			}
+		};
+
+		const emitCustomTip = (value) => {
+			ctx.emit("update:modelValue", parseInt(value) || 0);
+		};
+
 		return {
 			tips: [5, 10, 15, 25, 50],
 			selectedTip,
 			customTip,
 			rememberLastCustomTip,
+			emitCustomTip,
+			restoreLastTip,
+			lastTip,
 		};
 	},
 });
@@ -82,12 +100,6 @@ div:not(:last-child) {
 input[type="radio"] {
 	position: absolute;
 	opacity: 0;
-}
-
-input {
-	font-family: var(--font-family);
-	font-size: var(--font-size);
-	font-weight: 700;
 }
 
 input[type="radio"] + span {

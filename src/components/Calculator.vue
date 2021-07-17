@@ -1,12 +1,17 @@
 <template>
-	<form @reset.prevent="resetForm" class="calculator">
-		<Input name="Bill" v-model="bill" />
+	<form @reset="resetForm" class="calculator">
+		<Input name="Bill" v-model="bill" placeholder="0" type="number" />
 
 		<TipSelector v-model="tip" />
 
-		<Input name="Number of people" v-model="people" />
+		<Input
+			name="Number of people"
+			v-model="people"
+			placeholder="0"
+			type="number"
+		/>
 
-		<Results :total="total" />
+		<Results v-bind="results" />
 	</form>
 </template>
 
@@ -23,26 +28,41 @@ export default defineComponent({
 		Results,
 	},
 	setup() {
-		const bill = ref(0);
-		const people = ref(0);
-		const tip = ref("");
+		const bill = ref("");
+		const people = ref("");
+		const tip = ref(0);
 
-		const total = computed(() => {
-			return 0;
-		});
+		const total = computed(() => {});
 
 		const resetForm = () => {
-			bill.value = 0;
-			people.value = 0;
-			tip.value = "";
+			bill.value = "";
+			people.value = "";
+			tip.value = 0;
 		};
+
+		const results = computed(() => {
+			const billNum: number = Math.trunc(parseFloat(bill.value) * 100) || 0;
+			const peopleNum = parseInt(people.value);
+			const tipNum: number = tip.value;
+
+			const totalTip: number = billNum * tipNum;
+			const tipPerPerson: number = totalTip / (peopleNum || 1) / 10000;
+			const totalPerPerson: number =
+				billNum / (peopleNum || 1) / 100 + tipPerPerson;
+
+			return {
+				tipPerPerson,
+				totalPerPerson,
+			};
+		});
 
 		return {
 			bill,
 			people,
 			tip,
 			total,
-			resetForm
+			resetForm,
+			results,
 		};
 	},
 });

@@ -59,4 +59,10 @@ main {
 	gap: 4em;
 	padding-top: 4em;
 }
+
+input {
+	font-family: var(--font-family);
+	font-size: var(--font-size);
+	font-weight: 700;
+}
 </style>

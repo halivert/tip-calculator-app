@@ -5,37 +5,33 @@
 				<strong>Tip Amount</strong>
 				<small>/ person</small>
 			</div>
-			<span>${{ tipPerPerson }}</span>
+			<span>${{ tipPerPerson.toFixed(2) }}</span>
 		</div>
 		<div class="result">
 			<div>
 				<strong>Total</strong>
 				<small>/ person</small>
 			</div>
-			<span>${{ totalPerPerson }}</span>
+			<span>${{ totalPerPerson.toFixed(2) }}</span>
 		</div>
 		<button type="reset">Reset</button>
 	</div>
 </template>
 
 <script>
-import { computed, defineComponent } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-	setup() {
-		const tipPerPerson = computed(() => {
-			return 0;
-		});
-
-		const totalPerPerson = computed(() => {
-			return 0;
-		});
-
-		return {
-			tipPerPerson,
-			totalPerPerson,
-		};
-	}
+	props: {
+		tipPerPerson: {
+			type: Number,
+			default: 0,
+		},
+		totalPerPerson: {
+			type: Number,
+			default: 0,
+		},
+	},
 });
 </script>
 
