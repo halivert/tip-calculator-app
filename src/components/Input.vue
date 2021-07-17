@@ -1,6 +1,6 @@
 <template>
 	<div class="field">
-		<label :for="name">
+		<label :for="id">
 			<span>{{ name }}</span>
 			<span class="errors">{{ errors }}</span>
 		</label>
@@ -9,7 +9,7 @@
 		</i>
 		<input
 			:class="{ 'has-error': errors }"
-			:name="name"
+			:id="id"
 			:value="modelValue"
 			@input="emitBill"
 			v-bind="$attrs"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 
 export default defineComponent({
 	name: "Input",
@@ -29,13 +29,18 @@ export default defineComponent({
 		errors: String,
 	},
 	emits: ["update:modelValue"],
-	setup(_, ctx) {
+	setup(props, ctx) {
 		const emitBill = (event) => {
 			ctx.emit("update:modelValue", event.target.value);
 		};
 
+		const id = computed(() => {
+			return props.name.replace(/ /g, "");
+		});
+
 		return {
 			emitBill,
+			id,
 		};
 	},
 });
