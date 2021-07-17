@@ -56,8 +56,8 @@ main {
 	align-items: center;
 	box-sizing: border-box;
 	min-height: 100%;
-	gap: 4em;
-	padding-top: 4em;
+	gap: 3em;
+	padding-top: 2em;
 }
 
 input {
