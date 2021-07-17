@@ -29,6 +29,7 @@
 import { defineComponent, ref, toRefs, watch } from "vue";
 
 export default defineComponent({
+	name: "TipSelector",
 	props: {
 		modelValue: Number,
 	},

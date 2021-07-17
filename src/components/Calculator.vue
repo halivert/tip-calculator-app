@@ -40,6 +40,7 @@ import Results from "./Results.vue";
 library.add(faUser, faDollarSign);
 
 export default defineComponent({
+	name: "Calculator",
 	components: {
 		Input,
 		TipSelector,

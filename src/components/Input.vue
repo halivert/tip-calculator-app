@@ -21,6 +21,8 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+	name: "Input",
+	inheritAttrs: false,
 	props: {
 		name: String,
 		modelValue: [Number, String],

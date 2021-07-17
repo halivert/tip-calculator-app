@@ -54,10 +54,10 @@ main {
 	flex: 1;
 	flex-flow: column;
 	align-items: center;
+	justify-content: center;
 	box-sizing: border-box;
 	min-height: 100%;
 	gap: 3em;
-	padding-top: 2em;
 }
 
 input {
