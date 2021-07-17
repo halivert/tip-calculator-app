@@ -36,6 +36,7 @@ footer {
 	text-align: center;
 	font-size: 16px;
 	line-height: 1.5;
+	background: var(--white);
 }
 
 p {
@@ -73,4 +74,11 @@ a:focus-visible::before {
 	z-index: -1;
 	border-radius: 4px;
 }
+
+@media (min-width: 900px) {
+	footer {
+		background: transparent;
+	}
+}
+
 </style>

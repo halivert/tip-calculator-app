@@ -61,6 +61,7 @@ export default defineComponent({
 		};
 
 		const emitCustomTip = (value) => {
+			lastCustomTip.value = value;
 			ctx.emit("update:modelValue", parseInt(value) || 0);
 		};
 
@@ -79,7 +80,7 @@ export default defineComponent({
 
 <style scoped>
 div:not(:last-child) {
-	margin-bottom: 1em;
+	margin-bottom: 2em;
 }
 
 .tips {

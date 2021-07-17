@@ -1,7 +1,14 @@
 <template>
 	<div class="field">
-		<label :for="name">{{ name }}</label>
+		<label :for="name">
+			<span>{{ name }}</span>
+			<span class="errors">{{ errors }}</span>
+		</label>
+		<i class="icon">
+			<slot name="icon"></slot>
+		</i>
 		<input
+			:class="{ 'has-error': errors }"
 			:name="name"
 			:value="modelValue"
 			@input="emitBill"
@@ -12,10 +19,12 @@
 
 <script>
 import { defineComponent } from "vue";
+
 export default defineComponent({
 	props: {
 		name: String,
 		modelValue: [Number, String],
+		errors: String,
 	},
 	emits: ["update:modelValue"],
 	setup(_, ctx) {
@@ -32,6 +41,7 @@ export default defineComponent({
 
 <style scoped>
 .field {
+	position: relative;
 	display: flex;
 	flex-flow: column;
 	gap: 0.5em;
@@ -39,7 +49,29 @@ export default defineComponent({
 }
 
 .field:not(:last-child) {
-	margin-bottom: 1em;
+	margin-bottom: 2em;
+}
+
+label {
+	display: flex;
+	justify-content: space-between;
+}
+
+.errors {
+	color: var(--error);
+}
+
+.icon {
+	font-size: calc(var(--font-size) - 5px);
+	color: var(--dark-grayish-cyan-200);
+	position: absolute;
+	display: flex;
+	flex-flow: column;
+	height: 3rem;
+	aspect-ratio: 1 / 1;
+	bottom: 0;
+	justify-content: center;
+	align-items: center;
 }
 
 input {
@@ -52,5 +84,16 @@ input {
 	text-align: right;
 	appearance: textfield;
 	padding: 0 0.5em;
+	height: 3rem;
+}
+
+input:hover,
+input:focus,
+input:focus-visible {
+	border: 2px solid var(--strong-cyan);
+}
+
+input.has-error {
+	border: 2px solid var(--error);
 }
 </style>

@@ -1,18 +1,20 @@
 <template>
 	<div class="results">
-		<div class="result">
-			<div>
-				<strong>Tip Amount</strong>
-				<small>/ person</small>
+		<div>
+			<div class="result">
+				<div>
+					<strong>Tip Amount</strong>
+					<small>/ person</small>
+				</div>
+				<span>${{ tipPerPerson.toFixed(2) }}</span>
 			</div>
-			<span>${{ tipPerPerson.toFixed(2) }}</span>
-		</div>
-		<div class="result">
-			<div>
-				<strong>Total</strong>
-				<small>/ person</small>
+			<div class="result">
+				<div>
+					<strong>Total</strong>
+					<small>/ person</small>
+				</div>
+				<span>${{ totalPerPerson.toFixed(2) }}</span>
 			</div>
-			<span>${{ totalPerPerson.toFixed(2) }}</span>
 		</div>
 		<button type="reset">Reset</button>
 	</div>
@@ -45,6 +47,13 @@ div.results {
 	padding: 2em 1.25em;
 	border-radius: 12px;
 	gap: 1em;
+	justify-content: space-around;
+}
+
+.results > div {
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
 }
 
 div.result {
@@ -81,5 +90,20 @@ button[type="reset"] {
 	font-family: var(--font-family);
 	font-size: calc(var(--font-size) - 5px);
 	font-weight: 700;
+	cursor: pointer;
+}
+
+button[type="reset"]:hover,
+button[type="reset"]:focus,
+button[type="reset"]:focus-visible {
+	background: var(--background-100);
+}
+
+@media screen and (min-width: 900px) {
+	div.results {
+		margin-top: 0;
+		gap: 6em;
+		width: 100%;
+	}
 }
 </style>

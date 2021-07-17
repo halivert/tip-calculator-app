@@ -23,7 +23,7 @@ export default defineComponent({
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
-@import './vars.css';
+@import "./vars.css";
 
 body {
 	margin: 0;
@@ -64,5 +64,12 @@ input {
 	font-family: var(--font-family);
 	font-size: var(--font-size);
 	font-weight: 700;
+}
+
+@media all and (min-width: 900px) {
+	main {
+		max-width: 90ch;
+		align-self: center;
+	}
 }
 </style>
