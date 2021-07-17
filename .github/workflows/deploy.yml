@@ -19,7 +19,7 @@ jobs:
           cache: "yarn"
 
       - name: Build JS files
-        run: yarn && yarn prod
+        run: yarn && yarn build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
